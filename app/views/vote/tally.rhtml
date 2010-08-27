@@ -1,0 +1,6 @@
+<h1>Tally</h1>
+<% @results.each do |r| %>
+	<%= r.vote_count %> votes for <%= r.name %></br>
+<% end %>
+<br></br>
+<p><%= link_to "Back to all votes", :action => 'list' %></p>

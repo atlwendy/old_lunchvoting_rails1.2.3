@@ -1,0 +1,69 @@
+
+
+<div class="voteheader"><h1>All Votes for Today</h1></div>
+<h2> Voters and their votes </h2>
+<div class="votetable">
+<table id="table" class = "restaurantcontent">
+<tbody>
+<th width="20%">
+<p align="left">
+</p>
+<b> <%= link_to "Restaurant", :controller=>"restaurant",:action=>"list" %></b>
+</th>
+<th width = "20%">
+    <p align = "left"> </p>
+	 <b>Voter(votes)</b>
+ </tr>
+ <% count = 0%>
+ <% @restaurants.each do |restaurant| %>
+		<tr class="<%= (count % 2) == 0 ? 'even' : 'odd'%>">
+			<td><%=restaurant.name %></td>
+			<td>
+				<% restaurant.votes.each do |vote| %>
+					<% if vote.created_at == Date.today() %>
+						<%= vote.person_name %>(<%= vote.preference %>)
+						 
+					<% end %>
+				<% end %>
+			</td>
+			
+		</tr>
+		<% count = count + 1%>
+		<% end %>
+<th width = "10%"></th>
+</table>
+
+</div>
+<div class="clearer"> </div>
+<h2> Ranking </h2>
+<div class="votetable">
+<table id="table" class = "restaurantcontent">
+<tbody>
+<th width="20%">
+<p align="left">
+</p>
+<b> Restaurants</b>
+</th>
+<th width = "20%">
+<p align="center"></p>    
+<b>Total votes</b>
+</th>
+ <th width="20%">
+ <p align="center"> </p>
+ <b>No. of voters</b>
+ <% count = 0%>
+ <% @votes_by_restaurant.each do |rs| %>
+	<tr class="<%= (count % 2) == 0 ? 'even' : 'odd'%>"> <td><%=rs.name %></td>
+	<td><%= rs.preference %></td>
+	<td><%= rs.vote_count %></td>
+ <% count = count + 1%>
+ <% end %>
+ </table>
+</div>
+<div class="clearer"> </div> 
+ <div class = "votecontent">
+ <p><%= link_to("Vote Now!", {:controller => "restaurant", :action => "listandvote"}) %></p>
+ </div>
+ <p> </p> </ br>
+
+

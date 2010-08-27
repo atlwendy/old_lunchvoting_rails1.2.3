@@ -1,0 +1,13 @@
+
+<div class = "voteheader"><h1>Add New Restaurant for <%= (Group.find(session[:group_id])).name %></h1>
+</div>
+<div class="votecontent">
+<%= start_form_tag(:action => 'create')  %>
+<input id="restaurant_name" name="restaurant[name]" size="30" type="text" ></input>
+<input class="button" name="commit" type="submit" value="Add" ></input> <br><br>
+<a href="<%= url_for({:action => 'listandvote'}) %>" class="button">Go back to vote</a>
+<%= link_to('cancel', {:action => 'listandvote'}, {:class => 'button'}) %>
+<%= end_form_tag %>
+
+</div>
+

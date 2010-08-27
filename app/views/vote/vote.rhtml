@@ -1,0 +1,39 @@
+<div class = "voteheader2"><h1>Your Votes</h1>
+</div>
+<div class = "votecontent">
+You are <%= @vote.person_name %>.
+<span class="info">(Not <%= @vote.person_name%>?
+<%= link_to 'click here', :action => 'getname' %> )</span>
+
+<p>
+<% @votes.each do |vote| %>
+ <% if vote.created_at == Date.today %>
+	<%= vote.preference %> votes for <%= vote.restaurant.name %></br>
+ <% end %>
+<% end %>
+</p>
+
+  <% if @remaining_votes <= 0 then %>
+     You have used all your votes.
+     <%= link_to 'See all the votes so far', :controller =>'vote', :action => 'list' %>
+  <% else %>
+<%= start_form_tag(:action => 'vote')  %>
+    <p><input type="hidden" name="vote[person_name]" value="<%= @vote.person_name %>"></input></p>  
+
+    <p><label for="choice">Your restaurant choice</label>
+    	<%= select('vote', 'restaurant_id', Restaurant.find(:all).collect{|r| [r.name, r.id]}) %>
+    	&nbsp; <label for="Preference Level">Preference Level</label>
+    	<select id="points" name='vote[preference]'>
+    		<% (1..@remaining_votes).each do |count| %>
+    			<option><%=count%></option>
+    		<% end %>
+    	</select> <br>
+    	<span class="info">Didn't find the restaurant you like?
+    	<%= link_to 'Add new restaurants', :controller => 'restaurant', :action => 'new' %></span></p>
+    <p>
+    <input type="submit" value="Vote!"></input>
+    </p>
+    <p><span class="info"><%= link_to "Find all current votes", :action => 'list' %></span></p>
+  </div>
+<%= end_form_tag %>
+<% end %>

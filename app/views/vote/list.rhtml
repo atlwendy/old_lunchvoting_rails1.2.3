@@ -1,0 +1,35 @@
+<div class="voteheader"><h1>Vote Details for <%= @group_name %></h1></div>
+<div class="votecontent">
+<table class="allvotes">
+<thead>
+<tr>
+    <th style="width:55%">
+    Restaurant
+    </th>
+    <th style="width:20%">
+    Total votes
+    </th>
+    <th style="width:20%">
+    No. of voters
+    </th>
+</tr>
+</thead>
+<% count = 0%>
+<tbody>
+<% @votes_by_restaurant.each do |rs| %>
+    <tr class="<%= (count % 2) == 0 ? 'even' : 'odd'%>">
+        <td><%=rs.name %></td>
+        <td align="center"><%= rs.preference %></td>
+        <td align="center"><%= rs.vote_count %></td>
+    </tr>
+<% count = count + 1%>
+<% end %>
+</tbody>
+</table>
+</div>
+<div class="clearer"> </div> 
+<div class = "bottom-actions">
+<%= link_to("Vote Now!", {:controller => "restaurant", :action => "listandvote"}, {:class=>'button'}) %>
+</div>
+
+

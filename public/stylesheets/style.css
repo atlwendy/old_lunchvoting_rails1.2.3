@@ -1,0 +1,295 @@
+/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+html{color:#000;background:#FFF;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
+li{list-style:none;}
+caption,th{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+q:before,q:after{content:'';}
+abbr,acronym {border:0;font-variant:normal;}
+/* to preserve line-height and selector appearance */
+sup {vertical-align:text-top;}
+sub {vertical-align:text-bottom;}
+input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
+/*to enable resizing for IE*/
+input,textarea,select{*font-size:100%;}
+/*because legend doesn't inherit in IE */
+legend{color:#000;}
+
+
+/* end of reset */
+body, html{
+	font-size: 115%;
+}
+
+#header h1{
+	font-size: 200%;
+	float: left;
+}
+
+#header{
+	margin: 0 0 1em 0;
+	padding: 0 0.5em;
+}
+
+#wrapper{
+	text-align: left;
+	max-width: 48em;
+	margin: auto;
+}
+
+#menu{
+	border: 1px solid #ccc;
+	border-bottom: 3px solid #ccc;
+	border-right: 2px solid #ccc;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	margin-top: 0.5em;
+	float: right;
+}
+
+#menu li{
+	float: right;
+}
+
+#menu a{
+	display: block;
+	color: #aaa;
+	font-family: Arial, Tahoma, Verdana;
+	text-transform: lowercase;
+	padding: 0.2em 0.5em;
+	margin: 0;
+	text-decoration: none;
+	border-right: 1px solid #ccc;
+}
+#menu li:first-child a{
+	border-right: 0px none;
+}
+#menu a:hover, #menu a.current{
+	color: #000;
+	background-color: #FFFDBA;
+	text-decoration: none;
+}
+
+
+
+.clearer{
+	clear: both;
+}
+
+.votetable{
+	background: #EEEEEE;
+	margin: 0 10px;
+	padding: 0 0 20px 0;
+	float: left;
+	width: 29em;
+}
+.leftcolumn {
+	clear: both;
+	padding: 5px;
+	float: left;
+}
+.vote_count{
+	line-height: 1em;
+	text-align: center;
+	width: 3em;
+}
+.vote_count em{
+	
+	display: block;
+	font-size:150%;
+	font-weight:bold;
+}
+.vote_count span{
+	font-size: 60%;
+	line-height: 1em;
+}
+
+.vote_for{
+	text-align: center;
+}
+.vote_for a{
+	
+	color: #444;
+	font-weight: bold;
+	text-decoration: none;
+}
+.vote_for a, .disabled_link{
+	margin: 0;
+	padding: 0 0.3em;
+	font-size: 110%;
+}
+.disabled_link{
+	color: #aaa;
+	cursor: default;
+}
+	
+.voted .myvote {
+	padding: 0 0.3em;
+	background-color: orange;
+	font-size: 110%;
+	color: #000;
+	font-weight: bold;
+}
+.vetoclass {
+    padding: 0 0.3em;
+	font-size: 80%;
+	color: red;
+	font-color: red;
+	font-weight: bold;
+}
+#displayleftvote{
+	color: black;
+	line-height: 1em;
+	float: right;
+}
+#displayleftvote em{
+	font-weight: bold;
+	line-height: 1em;
+	font-size: 250%;
+	color: orange;
+	display: block;
+	text-align: center;
+}
+#displayleftvote span{
+	text-align: center;
+	font-size: 70%;
+	line-height: 1em;
+}
+    
+.even{
+	background: #FFFBD9;
+}
+
+.odd{
+	background: white;
+}
+
+.points {
+	color:#666666;
+	float:left;
+	font-size:90%;
+	text-align:center;
+	text-transform:lowercase;
+	width:40px;
+}
+
+.yourchoice{
+	border: 3px;
+	margin: 0px;
+	padding: 5px;
+	background: #8fff8f;
+}
+
+.info{
+	font-size: 70%;
+	font-style: italic;
+	background: #D8E3BF;
+}
+.info a{
+	color: #fff;
+}
+a.delete{
+	text-decoration: none;
+	font-size: 70%;
+}
+a.delete:hover{
+	color: #fff;
+	background-color: #587FBA;
+}
+.bottom-actions{
+	text-align: right;
+	margin: 1.5em 0 0.5em 0;
+}
+
+.button{
+	background-color: #C8D8A6;
+	border-top: 1px solid #aaa;
+	border-left: 1px solid #aaa;
+	border-right: 1px solid #444;
+	border-bottom: 1px solid #444;
+	text-decoration: none;
+	color: #000;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+a.button{	
+	padding: 0.4em 0.8em;
+}
+input.button{
+	padding: 0.2em 0.6em;
+}
+.bottom-actions a:hover, .button.hover{
+	background-color: #ECFFC5;
+}
+
+.voteheader h1{
+	font-size: 140%;
+}
+.votecontent{
+	padding: 1em 0;
+}
+#box{
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 2px solid #ccc;
+	border-bottom: 2px solid #ccc;
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	min-height: 480px;
+	padding: 1.4em;
+}
+p{
+	margin: 0.5em 0;
+}
+#table td, #table th{
+	padding: 0.5em 0;
+}
+#table{
+	width: 100%;
+}
+input{
+	padding: 0.2em;
+}
+.text{
+	border: 1px solid #888;
+}
+
+/* details table */
+table.allvotes{
+	width: 100%;
+}
+table.allvotes td, table.allvotes th{
+	padding: 0.5em 0.3em !important;
+}
+table.allvotes td{
+	border-left: 1px solid #eee;
+}
+table.allvotes td:first-child{
+	border: 0px none;
+}
+table.allvotes{
+	border-collapse: collapsed;
+}
+table.allvotes th{
+	background-color: #eee;
+	border: 1px solid #ddd;
+	border-bottom: 2px solid #bbb;
+	border-right: 2px solid #bbb;
+}
+a{
+	color: #587FBA;
+}
+.logincontent{
+	margin: auto;
+}
+.logincontent td{
+	padding: 0.5em 0;
+}

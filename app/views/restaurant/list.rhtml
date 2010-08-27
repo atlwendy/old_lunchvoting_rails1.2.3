@@ -1,0 +1,29 @@
+
+
+<div class="voteheader"><h1>All Current Restaurants</h1></div>
+<%= start_form_tag(:action => 'new')  %>
+<div class="beforetable"> Here is a list of all restaurants in the database. <p>Want to add a new one? <input type="submit" value="Add a new restaurant"></input> </p><p><%= start_form_tag(:controller =>'vote', :action => 'vote')  %>Want to vote on where you would like to go? <input type="submit" value="Vote!"></input></p></div>
+<%= end_form_tag%>
+<table id="table" class = "restaurantcontent">
+<tbody>
+<th width="90%">
+<p align="left">
+</p>
+</th>
+ <% count = 0%>
+ <% @restaurants.each do |restaurant| %>
+ 
+ <tr class="<%= (count % 2) == 0 ? 'even' : 'odd'%>">
+   <td><%= link_to restaurant.name, :action => "show", :id => restaurant.id %></td>
+   <td><span class="info"><%= link_to "Delete", {:action => "delete", :id => restaurant.id}, :confirm => "Really delete #{restaurant.name}?" %></span></td>
+   <% count = count + 1%>
+ </tr>
+  
+ <% end %>
+</div> 
+</table>
+
+<div class = "votecontent">
+<p><%= link_to "Add new restaurant", :action => "new" %></p>
+<p><%= link_to "Go to vote", :controller => "vote", :action => "vote" %></p>
+</div>

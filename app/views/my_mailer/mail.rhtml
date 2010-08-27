@@ -1,0 +1,5 @@
+Hi <%= @recipient %>,
+
+This is an invite from lunch voting at <%= @group %> group.
+You may click on the link to vote:
+<%= "http://futuretoby.dyndns.org/lunchvoting/restaurant/listandvote?hash=" + @hash.to_s %>

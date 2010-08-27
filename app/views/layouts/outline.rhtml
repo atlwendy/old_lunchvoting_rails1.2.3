@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Where to eat?</title>
+<link rel="stylesheet" href="http://yui.yahooapis.com/2.5.1/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+<link href="<%= root %>/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<%= root %>/javascripts/jquery.js"></script>
+<script type="text/javascript"><!--
+    ROOT = '<%= root %>';
+    
+    function voteForClicked(e){
+        e.preventDefault();
+        var restaurant_id = $(this).parents('tr').attr('id');
+        var user_id = $(this).parents('tr').find('.voteperson').html()
+        var votesum = $(this).parents('tr').find('.votesum').html()
+        var group_id = $(this).parents('tr').find('.votegroup').html()
+        var params = {'vote[user_id]': user_id, 'vote[restaurant_id]': restaurant_id, 'vote[group_id]': group_id, 'vote[preference]': $(this).html()};
+        var link = $(this);
+        $.post(ROOT + '/vote/create', params, function(result){
+            link.parents('tr').find('.vote_count em').html(result.count);
+            $('#displayleftvote em').html(result.left);
+            link.parents('tr').find('.vote_for').addClass('voted');
+            link.parents('tr').find('.votesum').html(result.preference);
+            rebuildlinks(result.left);
+        }, "json");
+        
+    }
+//    google.load("jquery", "1");
+    function rebuildlinks(left){
+        $(".vote_for").html("");
+        $(".vote_for.voted").each(function(){
+            var myvote = parseInt($(this).parents('tr').find('.votesum').html());
+            for (var i = 0; i < 4; i++){
+                if (left >= i && i != myvote)
+                    $(this).append('<a href="#">'+i+'</a>');
+                else if (i == myvote)
+                    $(this).append('<span class="myvote">' + i + '</span>');
+                
+                else
+                    $(this).append('<span class="disabled_link">' + i + '</span>');
+            }
+        });
+        $(".vote_for").not('.voted').each(function(){
+            for (var i = 0; i < 4; i++){
+                if (left >= i) {
+                    $(this).append('<a href="#">'+i+'</a>');
+                }
+                else {
+                    $(this).append('<span class="disabled_link">' + i + '</span>');
+                }
+            }
+            $(this).append('<a href="#">'+'<span class="vetoclass">'+'VETO'+'</span>'+'</a>')
+        });
+        
+        $(".vote_for a").click(voteForClicked);        
+    }
+    function load(){
+        //$(document).ready(function() {
+            rebuildlinks($('#displayleftvote').find('em').html());
+                   
+        //});
+        $('.button').mouseover(function(){
+            $(this).addClass('hover');
+        });
+        $('.button').mouseout(function(){
+            $(this).removeClass('hover');
+            
+        });
+    }
+    //google.setOnLoadCallback(load);
+    $(document).ready(function(){
+        load();
+    });
+    //-->
+</script>
+</head>
+
+<body>
+<div id="wrapper">
+<div id="header">
+    <% if not @no_menu then %>
+        <div id="menu">
+        <ul id="main-tabs">
+            <li>
+            <%= link_to "All Votes", {:controller => 'vote', :action => 'list'}, {:class => (request.path == '/vote/list' ? 'current': '')}%>
+            </li>
+            <li>
+            <%= link_to "Current Tally", {:controller => 'restaurant', :action => 'listandvote'}, {:class => (request.path == '/restaurant/listandvote' ? 'current': '')}%>
+            </li>
+            <li>
+            <%= link_to "Your Name", {:controller => 'vote', :action => 'getname'}, {:class => (request.path == '/vote/getname' ? 'current': '')}%>
+            </li>
+        </ul>
+        <div class="clearer"></div>
+        </div>
+    <% end %>
+<img alt="Where te eat?" src="<%= RAILS_ENV == 'production' ? '/lunchvoting' : '' %>/images/wheretoeat.png">
+<div class="clearer"></div>
+</div>
+<div id="box">
+<%= @content_for_layout %>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<script type="text/javascript" src="/javascripts/jquery.js"></script>
+<script type="text/javascript">
+    ROOT = '<%= RAILS_ENV == 'production' ? 'http://futuretoby.dyndns.org/lunchvoting' : '' %>';
+    $(document).ready(function(){
+        $(".button").click(function(e){
+            //e.preventDefault();
+            var groupname = $("groupname").parents('tr').find("[name = group]").html()
+        });
+});
+</script>
+
+<%= start_form_tag({:action => 'login'})  %>
+<table class="logincontent">
+    <tr>
+        <td><label for="Group Name">Group name: &nbsp </label></td>
+        <td><input class="text groupname" type="text" name="group"></input></td>
+    </tr>
+<!--    <tr>
+        <td><label for="Password">Secret word: &nbsp</label></td>
+        <td><input class="text" type="password" name="passwd"></input></td>
+    </tr>
+-->
+    <tr>
+        <td></td>
+        <td align="left">
+            <input name="commit" class="button" type="submit" value="Enter" />
+        </td>
+    </tr>
+</table>
+<%= end_form_tag %>

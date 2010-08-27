@@ -1,0 +1,12 @@
+
+
+<div class = "voteheader"><h1>What's your name?<h1></div>
+    <div class = "votecontent">
+        <%= start_form_tag({:action => 'getname'})  %>
+        <input class="text" type="text" name="person_name"></input><br>
+        <span class = "info">Are you from <%= (Group.find(session[:group_id])).name%> group? If not, input your group name here:</span>&nbsp;&nbsp;<span class="info">
+        <input class="text" type="text" name="group_name"></input></span><br><br>
+        <input class="button" name="commit" type="submit" value="Enter"/>
+	<%= end_form_tag %>
+    </div>
+</div>

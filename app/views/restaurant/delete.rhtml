@@ -1,0 +1,9 @@
+
+ 
+    <input id="restaurant_id" name="restaurant[id]" size="30" 
+         type="hidden" value= "<%= @restaurant.id %>"  />
+
+    <% @restaurant_id = Restaurant.find(@params['id']).destroy 
+    redirect_to :action => 'list' %>
+
+ 

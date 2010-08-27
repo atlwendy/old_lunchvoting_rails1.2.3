@@ -1,0 +1,39 @@
+<div id="displayleftvote">
+    <em class="en"><%= @user.remaining_votes(@group) %></em>
+    <span>votes left</span>
+</div>
+<div class="voteheader"><h1>Place your vote!</h1></div>
+<div class="votecontent">
+<p>
+Hello, <%= @user.emailaddress %> from <%= @group.name %>!
+<span class="info">(Not <%= @user.emailaddress %>? Or 
+Not belong to <%= @group.name %> group? 
+<%= link_to 'click here', :controller => 'vote', :action => 'getname' %>)
+</span>
+</p>
+<div class="clearer"></div>
+<table id="table" class = "restaurantlistandvote">
+<tbody>
+<% @vote_counts.each do |res| %>
+    <%
+    @my_vote = res.vote_by_user_today(@user, @group)
+    %>
+    <tr class="<%= cycle('even', 'odd') %>" id="<%= res.id %>">                    
+        <td><div class="vote_count"><em><%= res.vote_count or 0 %></em><span>votes</span></div></td>
+        <td width="30%" class="vote_for <%= @my_vote ? 'voted' : '' %>"></td>
+        <td class="voteperson" style="display: none;"><%= @user.id %></td>
+        <td class="votegroup" style ="display: none;"><%= @group.id %></td>
+        <td class="votesum" style="display: none;"><%= @my_vote ? @my_vote.preference: '' %></td>
+        <td width="60%" ><%= res.name %></td>
+        <td>
+            <span><%= link_to("delete", {:action => "delete", :id => res.id}, 
+                {:class=>'delete', :confirm => "Really delete #{res.name}?"}) %>
+            </span>
+        </td>
+    </tr>
+<% end %>
+</table>
+<div class="clearer"></div>
+<div class="bottom-actions">
+<%= link_to("Add new restaurant", {:action => "new"}, {:class => 'button'}) %>
+</div>

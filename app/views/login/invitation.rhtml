@@ -1,0 +1,40 @@
+
+<script type="text/javascript" src="/javascripts/jquery.js"></script>
+<script type="text/javascript"><!--
+    ROOT = '<%= RAILS_ENV == 'production' ? 'http://futuretoby.dyndns.org/lunchvoting' : '' %>';
+    $(document).ready(function(){
+        $(".intermitbutton").click(function(e){
+            e.preventDefault();
+            var commonvalue = $(this).parents('tr').find("[name=email]")
+            var thisemailaddress = commonvalue.attr('value');
+            //console.log('email: ' + thisemailaddress);
+            $('table.logincontent').append("<tr><td align='right'>"+thisemailaddress+"<input name='emailaddress[]' type='hidden' value='"+thisemailaddress+"'></input></td></tr>");
+            commonvalue.attr('value','');
+            commonvalue.focus();
+        });
+//        $(".nosend").click(function(e){
+//            e.preventDefault();    
+//        });
+    });
+
+//-->
+</script>
+<%= start_form_tag({:action => 'invitation'})  %>
+<table class="logincontent">
+    <tr>
+        <td><label for="Email address">Please enter email addresses: &nbsp </label></td>
+        <td><input class="text" type="text" name="email"></input>
+        
+        <input class="button intermitbutton" name="addmore" type="submit" value="Add"></input></td><td>&nbsp;&nbsp;<span class="info">
+           Nobody to invite? Then <%= link_to('go vote now', {:action => 'getname', :controller => 'vote'}, {:class => 'button_info'}) %></span>
+        </td>
+    </tr>
+    
+    <tr>
+        <td></td>
+        <td align="left">
+            <input name="commit" class="button buttonenter" type="submit" value="Send now" />
+        </td>
+    </tr>
+</table>
+<%= end_form_tag %>
