@@ -1,5 +1,6 @@
 class RestaurantController < ApplicationController
     # some comment
+    # another comment
     layout "outline"
     def new
      @vote = Vote.new params['vote']
